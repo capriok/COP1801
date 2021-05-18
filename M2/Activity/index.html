@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>COP1801 JS</title>
+		<link rel="stylesheet" href="../../index.css">
+		<script defer>
+			const ErrorButton = document.createElement('button')
+			ErrorButton.innerText = "Invalid Input, Try Again."
+			ErrorButton.addEventListener('click', () => GetInputs())
+
+			function GetInputs () {
+				const ErrorTarget = document.getElementById("error-target")
+
+				ErrorTarget.children.length > 0 && ErrorTarget.removeChild(ErrorButton)
+
+				const n1 = parseInt(prompt("Enter first number"))
+				const n2 = parseInt(prompt("Enter second number"))
+				
+				if (!Number.isInteger(n1) || !Number.isInteger(n2)) {
+					return ErrorTarget.appendChild(ErrorButton)
+				}
+
+				const inputTarget = document.getElementById("input-target")
+				inputTarget.innerHTML = `<br/><p><strong>${n1} | ${n2}</strong></p><br/>`
+
+				console.log({First: n1, Second: n2});
+
+				SumFn(n1, n2)
+				ProductFn(n1, n2)
+				TripledSumFn(n1, n2)
+			}
+
+			const SumFn = (n1, n2) => {
+				const result = n1 + n2
+				const target = document.getElementById("sum-target")
+				console.log({Sum: result})
+				target.innerHTML = `<label>Sum: </label><p>${result}</p>`
+			}
+			const ProductFn = (n1, n2) => {
+				const result = n1 * n2
+				const target = document.getElementById("product-target")
+				console.log({Product: result})
+				target.innerHTML = `<label>Product: </label><p>${result}</p>`
+			}
+			const TripledSumFn = (n1, n2) => {
+				const result = (n1 + n2) * 3
+				const target = document.getElementById("tripledsum-target")
+				console.log({TripledSum: result})
+				target.innerHTML = `<label>Tripled Sum: </label><p>${result}</p>`
+			}
+			
+		</script>
+	</head>
+	<body onload="GetInputs()">
+		<nav class="nav">
+			<p>Kyle Caprio</p>
+			<p>COP1801 JavaScript</p>
+			<p><a href="/kylecaprio/COP1801JavaScript/COP1801-Directory.html">Directory</a></p>
+		</nav>
+		<header class="head">
+			<h2>Module 2</h2>
+			<p>Activity: Working With Data</p>
+			<p>Task: Prompt user for two numbers, display results of sum, product, and tripled sum functions</p>
+		</header>
+
+		<section class="section">
+			<div id="error-target"></div></center>
+			<section>
+				<div id="input-target"></div>
+				<div id="sum-target"></div>
+				<div id="product-target"></div>
+				<div id="tripledsum-target"></div>
+			</section>
+		</section>
+	</body>
+</html>

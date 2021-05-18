@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>COP1801 JS</title>
+		<link rel="stylesheet" href="../../index.css">
+		<script>
+
+		function Display () {
+			setTimeout(() => {
+				const p = document.getElementById('target')
+				return p.textContent = 'Hello World!'
+			}, 5000)
+		}
+
+		</script>
+	</head>
+	<body onload="Display()">
+		<nav class="nav">
+			<p>Kyle Caprio</p>
+			<p>COP1801 JavaScript</p>
+			<p><a href="/kylecaprio/COP1801JavaScript/COP1801-Directory.html">Directory</a></p>
+		</nav>
+		<header class="head">
+			<h2>Module 1</h2>
+			<p>Course Project: Hello World!</p>
+			<p>Task: Write a function that displays Hello World after 5 seconds</p>
+		</header>
+
+		<center><p id="target">Wait for Function Delivery</p></center>
+
+	</body>
+</html>
