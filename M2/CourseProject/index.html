@@ -17,57 +17,57 @@
 		<header class="head">
 			<h2>Module 2</h2>
 			<p>Course Project: Developing Logic</p>
-			<p>Task: Pseudocode to prompt for two numbers, display results of sum, product, and tripled sum functions</p>
+			<p>Task: Write pseudocode to prompt for two numbers, display results of sum, product, and tripled sum functions</p>
 		</header>
 
 		<section class="section">
 			<div id="error-target"></div></center>
 		<section>
-			<p id="">Input PseudoCode</p>
+<p>User Input</p>
 <code><pre>
 Declare n1 <- undefined
 Declare n2 <- undefined
 
 Input n1, n2
 
-n1 <- parse n1 into int
-n2 <- parse n2 into int
+n1 <- parse n1 into number
+n2 <- parse n2 into number
 
-If n1 is not number or n2 is not number
-	Display Error 
+If n1 is not a number or n2 is not a number
+	Return Display Error 
 End If</pre>
 </code>
 				
-				<p id="">Sum Function</p>
+<p>Sum Function</p>
 <code><pre>
 Call Sum (n1, n2)
 
 Function Sum (n1 number, n2 number)
 	Declare result <- n1 + n2
-	Declare target <- DOM Element sum-target
-	target innerHTML <- result
+	Declare target <- DOM Element with id "sum-target"
+	Set target innerHTML <- result
 End Function</pre>
 </code>
 
-				<p id="">Product Function</p>
+<p>Product Function</p>
 <code><pre>
 Call Product (n1, n2)
 
 Function Product (n1 number, n2 number)
 	Declare result <- n1 * n2
-	Declare target <- DOM Element sum-target
-	target innerHTML <- result
+	Declare target <- DOM Element with id "product-target"
+	Set target innerHTML <- result
 End Function</pre>
 </code>
 
-			<p id="">Tripled Sum Function</p>
+<p>Tripled Sum Function</p>
 <code><pre>
 Call TripledSum (n1, n2)
 
 Function TripledSum (n1 number, n2 number)
 	Declare result <- (n1 + n2) * 3
-	Declare target <- DOM Element sum-target
-	target innerHTML <- result
+	Declare target <- DOM Element with id "tripledsum-target"
+	Set target innerHTML <- result
 End Function</pre>
 </code>
 			</section>
