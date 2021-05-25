@@ -40,24 +40,23 @@
 
 			// Catch outlying conditions
 			if (input === '') return
-			if (seperated.length < 3) return setDOMTargets('Enter at least 3 sepereated values')
+			if (seperated.length < 3) return setInputTarget('Enter at least 3 sepereated values')
 
 			// Sort split input values
 			const sorted = sortSeperated(seperated)
 
-			console.log({Input: input})
+			console.log({Input: seperated})
 			console.log({Sorted: sorted})
 
 			// Display values
-			setDOMTargets(input, sorted)
+			setInputTarget(input)
+			setSortedTarget(sorted)
 		}
 
-		const sortSeperated = (arr) => arr.sort((a, b) => a > b ? 1 : 0)
+		const sortSeperated = (arr) => [...arr].sort((a, b) => a > b ? 1 : 0)
 		
-		const setDOMTargets = (input, sorted) => {
-			$(`<div><strong>Input:</strong> ${input.split(',').map(s => ' ' + s)}</div>`).appendTo('main').addClass('input-target')
-			sorted && $(`<div><strong>Sorted:</strong> ${sorted.map(s => ' ' + s)}</div>`).appendTo('main').addClass('result-target')
-		}
+		const setInputTarget = (input) => $(`<div><strong>Input:</strong> ${input.split(',').map(s => ' ' + s)}</div>`).appendTo('main').addClass('input-target')
+		const setSortedTarget = (sorted) => $(`<div><strong>Sorted:</strong> ${sorted.map(s => ' ' + s)}</div>`).appendTo('main').addClass('result-target')
 
 	</script>
 	<style>

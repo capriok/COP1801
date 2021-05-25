@@ -27,7 +27,6 @@
 	</body>
 
 	<script>	
-		const IS_INT = input => Number.isInteger(input)
 		const IN_RANGE = y => y >= 1928 && y <= 2021
 
 		const submit = () =>  {
@@ -38,14 +37,17 @@
 			// Get value from input
 			const input = parseInt($('input').val())
 
-			// Do nothing and display error if input is not a number
-			if (!IS_INT(input)) return setDOMTargets('Not A Number')
+			// Display error if input is not a number
+			if (!Number.isInteger(input)) return setYearTarget('Not A Number')
 
 			// Get generation absed on input value
 			const result = determineGeneration(input)
 
-			// Display values on webpage
-			IN_RANGE(input) && setDOMTargets(input, result)
+			// Display only if input is in interpretable range
+			if (IN_RANGE(input)) {
+				setYearTarget(input)
+				setGenTarget(result)
+			}
 		}
 
 		const determineGeneration = (year) => {
@@ -67,16 +69,13 @@
 					console.log({Generation: 'Generation Z'})
 					return 'Generation Z'
 				default:
-					console.log({Generation: 'Unknown'})
-					return setDOMTargets('', 'Unknown')
+					return setGenTarget('Unknown')
 			}
 		}
 
-		const setDOMTargets = (input, result) => {
-			input && $(`<div><strong>Birth Year:</strong> ${input}</div>`).appendTo('main').addClass('input-target')
-			result && $(`<div><strong>Generation:</strong> ${result}</div>`).appendTo('main').addClass('result-target')
-		}
-		
+		const setYearTarget = (x) => $(`<div><strong>Birth Year:</strong> ${x}</div>`).appendTo('main').addClass('input-target')
+		const setGenTarget = (x) => $(`<div><strong>Generation:</strong> ${x}</div>`).appendTo('main').addClass('result-target')
+
 	</script>
 	<style>
 		main {

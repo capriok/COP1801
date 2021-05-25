@@ -19,32 +19,23 @@
 
 		<main>
 			<div><input id="input" type="text" placeholder="Enter something to reverse"></div>
-			<div><button type="button" id="rev-button" onclick="reverseInput()">Reverse Input</button></div>
+			<div><button type="button" id="submit-button" onclick="displayInput()">Display Input</button></div>
 		</main>
 	</body>
 
 	<script>
-		const reverseInput = () => {
+		const displayInput = () => {
 			// Clear current target displays
-			$('.original-target').remove()
-			$('.reversed-target').remove()
+			$('.input-target').remove()
 
-			// Get value from input
-			const str = $('#input').val()
+			// Get value from input field
+			const input = $('#input').val()
 
-			// Do nothing if input is empty
-			if (str === "") return
+			// Console log input value
+			console.log({Input: input})
 
-			// Reverse the input value
-			const reversed = str.split("").reverse().join("").toString()
-
-			// Console log values
-			console.log({Original: str})
-			console.log({Reversed: reversed})
-
-			// Display values on webpage
-			$(`<div><strong>Original:</strong> ${str}</div>`).appendTo('main').addClass('original-target')
-			$(`<div><strong>Reversed:</strong> ${reversed}</div>`).appendTo('main').addClass('reversed-target')
+			// Display input value on webpage
+			$(`<div><strong>Input:</strong> ${input}</div>`).appendTo('main').addClass('input-target')
 		}
 		
 	</script>
