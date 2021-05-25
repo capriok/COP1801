@@ -4,9 +4,6 @@
 		<meta charset="UTF-8">
 		<title>COP1801 JS</title>
 		<link rel="stylesheet" href="../../index.css">
-		<script defer>
-			
-		</script>
 	</head>
 	<body>
 		<nav class="nav">
@@ -20,9 +17,8 @@
 			<p>Task: Write pseudocode to prompt for two numbers, display results of sum, product, and tripled sum functions</p>
 		</header>
 
-		<section class="section">
+		<main>
 			<div id="error-target"></div></center>
-		<section>
 <p>User Input</p>
 <code><pre>
 Declare n1 <- undefined
@@ -70,7 +66,21 @@ Function TripledSum (n1 number, n2 number)
 	Set target innerHTML <- result
 End Function</pre>
 </code>
-			</section>
-		</section>
+		</main>
 	</body>
+	
+	<style>
+		main > code {
+			min-width: 500px;
+			padding: 0 15px;
+			margin-bottom: 20px;
+			border-radius: 10px;
+			border: 1px solid rgb(216, 216, 216);
+			background-color: rgb(240, 240, 240);
+		}
+		main > code > pre {
+			line-height: 1.15rem;
+			font-family: monospace;
+		}
+	</style>
 </html>

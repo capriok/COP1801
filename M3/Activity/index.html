@@ -4,9 +4,6 @@
 		<meta charset="UTF-8">
 		<title>COP1801 JS</title>
 		<link rel="stylesheet" href="../../index.css">
-		<script defer>
-			
-		</script>
 	</head>
 	<body>
 		<nav class="nav">
@@ -16,9 +13,44 @@
 		</nav>
 		<header class="head">
 			<h2>Module 3</h2>
-			<p>Activity: </p>
+			<p>Activity: Write a function that will reverse a string or number</p>
 		</header>
 
-		<center><div class="target">Target</div></center>
+		<main>
+			<div><input id="rev-input" type="text" placeholder="Enter something to reverse"></div>
+			<div><button type="button" id="rev-button" onclick="reverseInput()">Reverse Input</button></div>
+			<div id="original-target"></div>
+			<div id="reversed-target"></div>
+		</main>
 	</body>
+
+	<script>
+		const originalTarget = document.getElementById('original-target')
+		const reversedTarget = document.getElementById('reversed-target')
+
+		const reverseInput = () => {
+			// Get value from input
+			const str = document.getElementById('rev-input').value
+			
+			// Do nothing If input is Empty
+			if (str === "") return
+
+			// Reverse the input Value
+			const reversed = str.split("").reverse().join("").toString()
+
+			// Console log values
+			console.log({Original: str})
+			console.log({Reversed: reversed})
+
+			// Display values on webpage
+			originalTarget.innerText = 'Original: ' + str
+			reversedTarget.innerText = 'Reversed: ' + reversed
+		}
+	</script>
+	<style>
+		main {
+			margin: 0 auto;
+			text-align: center;
+		}
+	</style>
 </html>

@@ -4,9 +4,7 @@
 		<meta charset="UTF-8">
 		<title>COP1801 JS</title>
 		<link rel="stylesheet" href="../../index.css">
-		<script defer>
-			
-		</script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	</head>
 	<body>
 		<nav class="nav">
@@ -16,9 +14,74 @@
 		</nav>
 		<header class="head">
 			<h2>Module 4</h2>
-			<p>Course Project: </p>
+			<p>Course Project: Extend M3 Course Project Functionality</p>
+			<p>Continued: Allow user to enter any string, create a function that performs some action on the
+				entry after a button click</p>
 		</header>
 
-		<center><div class="target">Target</div></center>
+		<main>
+			<div>What generation were you born in?</div>
+			<div><input id="input" type="text" placeholder="Enter Birth Year"></div>
+			<div><button type="button" onclick="submit()">Find Generation</button></div>
+		</main>
 	</body>
+
+	<script>	
+		const IS_INT = input => Number.isInteger(input)
+		const IN_RANGE = y => y >= 1928 && y <= 2021
+
+		const submit = () =>  {
+			// Clear dom targets displays 
+			$('.input-target').remove()
+			$('.result-target').remove()
+
+			// Get value from input
+			const input = parseInt($('input').val())
+
+			// Do nothing and display error if input is not a number
+			if (!IS_INT(input)) return setDOMTargets('Not A Number')
+
+			// Get generation absed on input value
+			const result = determineGeneration(input)
+
+			// Display values on webpage
+			IN_RANGE(input) && setDOMTargets(input, result)
+		}
+
+		const determineGeneration = (year) => {
+			console.log({BirthYear: year})
+			switch (true) {
+				case (year >= 1928 && year <= 1945):
+					console.log({Generation: 'Silent Generation'})
+					return 'Silent Generation'
+				case (year >= 1946 && year <= 1964):
+					console.log({Generation: 'Baby Boomer'})
+					return 'Baby Boomer'
+				case (year >= 1965 && year <= 1980):
+					console.log({Generation: 'Generation X'})
+					return 'Generation X'
+				case (year >= 1981 && year <= 1996):
+					console.log({Generation: 'Millenial'})
+					return 'Millenial'
+				case (year >= 1997 && year <= 2021):
+					console.log({Generation: 'Generation Z'})
+					return 'Generation Z'
+				default:
+					console.log({Generation: 'Unknown'})
+					return setDOMTargets('', 'Unknown')
+			}
+		}
+
+		const setDOMTargets = (input, result) => {
+			input && $(`<div><strong>Birth Year:</strong> ${input}</div>`).appendTo('main').addClass('input-target')
+			result && $(`<div><strong>Generation:</strong> ${result}</div>`).appendTo('main').addClass('result-target')
+		}
+		
+	</script>
+	<style>
+		main {
+			margin: 0 auto;
+			text-align: center;
+		}
+	</style>
 </html>

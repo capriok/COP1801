@@ -4,63 +4,7 @@
 		<meta charset="UTF-8">
 		<title>COP1801 JS</title>
 		<link rel="stylesheet" href="../../index.css">
-		<script defer>
-			const ErrorButton = document.createElement('button')
-			ErrorButton.innerText = "Invalid Input, Try Again."
-			ErrorButton.addEventListener('click', () => GetInputs())
-
-			function GetInputs () {
-				const ErrorTarget = document.getElementById("error-target")
-
-				ErrorTarget.children.length > 0 && ErrorTarget.removeChild(ErrorButton)
-
-				// Prompt User
-				const n1 = parseInt(prompt("Enter first number"))
-				const n2 = parseInt(prompt("Enter second number"))
-				
-				// Verify inputs are numeric
-				if (!Number.isInteger(n1) || !Number.isInteger(n2)) {
-					return ErrorTarget.appendChild(ErrorButton)
-				}
-
-				// Display User Inputs
-				const inputTarget = document.getElementById("input-target")
-				inputTarget.innerHTML = `<br/><p><strong>${n1} | ${n2}</strong></p><br/>`
-
-				console.log({First: n1, Second: n2});
-
-				// Call Arithmetic Fns
-				const sum = SumFn(n1, n2)
-				const prod = ProductFn(n1, n2)
-				const trip = TripledSumFn(n1, n2)
-
-				// Console Log Results
-				console.log({Sum: sum})
-				console.log({Product: prod})
-				console.log({TripledSum: trip})
-			}
-
-			const SumFn = (n1, n2) => {
-				const result = n1 + n2
-				const target = document.getElementById("sum-target")
-				target.innerHTML = `<label>Sum: </label><p>${result}</p>`
-				return result
-			}
-			const ProductFn = (n1, n2) => {
-				const result = n1 * n2
-				const target = document.getElementById("product-target")
-				target.innerHTML = `<label>Product: </label><p>${result}</p>`
-				return result
-			}
-			const TripledSumFn = (n1, n2) => {
-				const result = (n1 + n2) * 3
-				const target = document.getElementById("tripledsum-target")
-				target.innerHTML = `<label>Tripled Sum: </label><p>${result}</p>`
-				return result
-			}
-			
-		</script>
-	</head>
+</head>
 	<body onload="GetInputs()">
 		<nav class="nav">
 			<p>Kyle Caprio</p>
@@ -73,14 +17,79 @@
 			<p>Task: Prompt user for two numbers, display results of sum, product, and tripled sum functions</p>
 		</header>
 
-		<section class="section">
+		<main>
 			<div id="error-target"></div></center>
-			<section>
 				<div id="input-target"></div>
 				<div id="sum-target"></div>
 				<div id="product-target"></div>
 				<div id="tripledsum-target"></div>
-			</section>
-		</section>
+		</main>
 	</body>
+	
+	<script>
+		const ErrorButton = document.createElement('button')
+		ErrorButton.innerText = "Invalid Input, Try Again."
+		ErrorButton.addEventListener('click', () => GetInputs())
+
+		function GetInputs () {
+			const ErrorTarget = document.getElementById("error-target")
+
+			ErrorTarget.children.length > 0 && ErrorTarget.removeChild(ErrorButton)
+
+			// Prompt user for input
+			const n1 = parseInt(prompt("Enter first number"))
+			const n2 = parseInt(prompt("Enter second number"))
+			
+			// Verify inputs are numeric
+			if (!Number.isInteger(n1) || !Number.isInteger(n2)) {
+				return ErrorTarget.appendChild(ErrorButton)
+			}
+
+			// Display user inputs
+			const inputTarget = document.getElementById("input-target")
+			inputTarget.innerHTML = `<br/><p><strong>${n1} | ${n2}</strong></p><br/>`
+
+			console.log({First: n1, Second: n2});
+
+			// Call arithmetic fns
+			const sum = SumFn(n1, n2)
+			const prod = ProductFn(n1, n2)
+			const trip = TripledSumFn(n1, n2)
+
+			// Console log results
+			console.log({Sum: sum})
+			console.log({Product: prod})
+			console.log({TripledSum: trip})
+		}
+
+		const SumFn = (n1, n2) => {
+			const result = n1 + n2
+			const target = document.getElementById("sum-target")
+			target.innerHTML = `<label>Sum: </label><p>${result}</p>`
+			return result
+		}
+		const ProductFn = (n1, n2) => {
+			const result = n1 * n2
+			const target = document.getElementById("product-target")
+			target.innerHTML = `<label>Product: </label><p>${result}</p>`
+			return result
+		}
+		const TripledSumFn = (n1, n2) => {
+			const result = (n1 + n2) * 3
+			const target = document.getElementById("tripledsum-target")
+			target.innerHTML = `<label>Tripled Sum: </label><p>${result}</p>`
+			return result
+		}
+		
+	</script>
+	<style>
+		main > div {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0 15px;
+			margin: 5px 0;
+			background-color: rgb(240, 240, 240);
+		}
+	</style>
 </html>

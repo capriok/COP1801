@@ -4,16 +4,6 @@
 		<meta charset="UTF-8">
 		<title>COP1801 JS</title>
 		<link rel="stylesheet" href="../../index.css">
-		<script>
-
-		function Display () {
-			setTimeout(() => {
-				const p = document.getElementById('target')
-				return p.textContent = 'Hello World!'
-			}, 5000)
-		}
-
-		</script>
 	</head>
 	<body onload="Display()">
 		<nav class="nav">
@@ -27,7 +17,18 @@
 			<p>Task: Write a function that displays Hello World after 5 seconds</p>
 		</header>
 
-		<center><p id="target">Wait for Function Delivery</p></center>
-
+		<main>
+			<div style="text-align: center" id="target">Wait for Function Delivery</div>
+		</main>
 	</body>
+
+	<script>
+		function Display () {
+			setTimeout(() => {
+				const p = document.getElementById('target')
+				return p.textContent = 'Hello World!'
+			}, 5000)
+		}
+		</script>
+	<style></style>
 </html>

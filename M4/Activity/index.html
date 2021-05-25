@@ -4,9 +4,7 @@
 		<meta charset="UTF-8">
 		<title>COP1801 JS</title>
 		<link rel="stylesheet" href="../../index.css">
-		<script defer>
-			
-		</script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	</head>
 	<body>
 		<nav class="nav">
@@ -16,9 +14,56 @@
 		</nav>
 		<header class="head">
 			<h2>Module 4</h2>
-			<p>Activity: </p>
+			<p>Activity: Write a conditional statement that sorts three numbers or strings. Display results
+				on webpage</p>
 		</header>
 
-		<center><div class="target">Target</div></center>
+		<main>
+			<div>Enter three comma seperated strings or numbers</div>
+			<div><input id="input" type="text" placeholder="foo, bar, baz"></div>
+			<div><button type="button" id="sumbit" onclick="submit()">Sumbit</button></div>
+		</main>
 	</body>
+
+	<script>
+			
+		function submit () {
+			// Clear current DOM Targets
+			$('.input-target').remove()
+			$('.result-target').remove()
+
+			// Get input value
+			const input = $('#input').val()
+
+			// Remove spaces and seperate
+			const seperated = input.replace(/\s/g, '').split(',')
+
+			// Catch outlying conditions
+			if (input === '') return
+			if (seperated.length < 3) return setDOMTargets('Enter at least 3 sepereated values')
+
+			// Sort split input values
+			const sorted = sortSeperated(seperated)
+
+			console.log({Input: input})
+			console.log({Sorted: sorted})
+
+			// Display values
+			setDOMTargets(input, sorted)
+		}
+
+		const sortSeperated = (arr) => arr.sort((a, b) => a > b ? 1 : 0)
+		
+		const setDOMTargets = (input, sorted) => {
+			$(`<div><strong>Input:</strong> ${input.split(',').map(s => ' ' + s)}</div>`).appendTo('main').addClass('input-target')
+			sorted && $(`<div><strong>Sorted:</strong> ${sorted.map(s => ' ' + s)}</div>`).appendTo('main').addClass('result-target')
+		}
+
+	</script>
+	<style>
+			main {
+				margin: 0 auto;
+				text-align: center;
+			}
+		</style>
 </html>
