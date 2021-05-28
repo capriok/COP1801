@@ -19,50 +19,73 @@
 		</header>
 
 		<main>
-			<div>Enter three comma seperated strings or numbers</div>
-			<div><input id="input" type="text" placeholder="foo, bar, baz"></div>
-			<div><button type="button" id="sumbit" onclick="submit()">Sumbit</button></div>
+			<div>Enter three input values</div>
+			<form id="form-target">
+				<div class="form-inputs">
+					<input id="form-input" name="0" type="text" placeholder="First">
+					<input id="form-input" name="1" type="text" placeholder="Second">
+					<input id="form-input" name="2" type="text" placeholder="Third">
+				</div>
+				<div><button id="form-button" type="submit">Sumbit</button></div>
+			</form>
 		</main>
 	</body>
 
 	<script>
 			
-		function submit () {
+		$('#form-target').submit(e => submit(e))
+		$('#form-input').submit(e => submit(e))
+		$('#form-button').click(e => submit(e))
+
+		function submit (e) {
+			// Prevent form submission
+			e.preventDefault()
+
 			// Clear current DOM Targets
 			$('.input-target').remove()
 			$('.result-target').remove()
 
-			// Get input value
-			const input = $('#input').val()
-
-			// Remove spaces and seperate
-			const seperated = input.replace(/\s/g, '').split(',')
+			let inputValues = new Array()
+			for	(let i = 0; i < 3; i++){
+				const value = $(`input[name="${i}"]`).val()
+				inputValues.push(value)
+			}
+			console.log(inputValues)
 
 			// Catch outlying conditions
-			if (input === '') return
-			if (seperated.length < 3) return setInputTarget('Enter at least 3 sepereated values')
+			if (inputValues.some(v => !v.length ? true : false)) return setInputTarget(['Invalid Input'])
 
-			// Sort split input values
-			const sorted = sortSeperated(seperated)
+			// Sort input values
+			const sortedValues = [...inputValues].sort((a, b) => a > b ? 1 : 0)
 
-			console.log({Input: seperated})
-			console.log({Sorted: sorted})
+			console.log({Input: inputValues})
+			console.log({Sorted: sortedValues})
 
 			// Display values
-			setInputTarget(input)
-			setSortedTarget(sorted)
+			setInputTarget(inputValues)
+			setSortedTarget(sortedValues)
 		}
 
-		const sortSeperated = (arr) => [...arr].sort((a, b) => a > b ? 1 : 0)
-		
-		const setInputTarget = (input) => $(`<div><strong>Input:</strong> ${input.split(',').map(s => ' ' + s)}</div>`).appendTo('main').addClass('input-target')
-		const setSortedTarget = (sorted) => $(`<div><strong>Sorted:</strong> ${sorted.map(s => ' ' + s)}</div>`).appendTo('main').addClass('result-target')
+		const setInputTarget = (inputValues) => $(`<div><strong>Input:</strong> ${inputValues.map(s => ' ' + s)}</div>`).appendTo('main').addClass('input-target')
+		const setSortedTarget = (sortedValues) => $(`<div><strong>Sorted:</strong> ${sortedValues.map(s => ' ' + s)}</div>`).appendTo('main').addClass('result-target')
 
 	</script>
 	<style>
-			main {
-				margin: 0 auto;
-				text-align: center;
-			}
+		main {
+			margin: 0 auto;
+			text-align: center;
+		}
+		form {
+			width: 400px;
+		}
+		.form-inputs{
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+		}
+		.form-inputs input {
+			width: 200px;
+			margin: 5px;
+		}
 		</style>
 </html>

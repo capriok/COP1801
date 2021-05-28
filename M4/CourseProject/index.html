@@ -21,16 +21,23 @@
 
 		<main>
 			<div>What generation were you born in?</div>
-			<div><input id="input" type="text" placeholder="Enter Birth Year"></div>
-			<div><button type="button" onclick="submit()">Find Generation</button></div>
+			<form id="form-target">
+				<div><input id="input" type="text" placeholder="Enter Birth Year"></div>
+				<div><button id="form-button" type="submit">Find Generation</button></div>
+			</form>
 		</main>
 	</body>
 
-	<script>	
-		const IN_RANGE = y => y >= 1928 && y <= 2021
+	<script>
 
-		const submit = () =>  {
-			// Clear dom targets displays 
+		$('#form-target').submit(e => submit(e))
+		$('#form-button').click(e => submit(e))
+
+		function submit () {
+			// Prevent form submission
+			e.preventDefault()
+
+			// Clear dom target displays 
 			$('.input-target').remove()
 			$('.result-target').remove()
 
@@ -41,13 +48,13 @@
 			if (!Number.isInteger(input)) return setYearTarget('Not A Number')
 
 			// Get generation absed on input value
-			const result = determineGeneration(input)
+			const generation = determineGeneration(input)
 
 			// Display only if input is in interpretable range
-			if (IN_RANGE(input)) {
+			if (input >= 1928 && input <= 2021) {
 				setYearTarget(input)
-				setGenTarget(result)
-			}
+				setGenTarget(generation)
+			}		
 		}
 
 		const determineGeneration = (year) => {
@@ -78,9 +85,12 @@
 
 	</script>
 	<style>
-		main {
+		main{
 			margin: 0 auto;
 			text-align: center;
+		}
+		form {
+			width: 400px;
 		}
 	</style>
 </html>

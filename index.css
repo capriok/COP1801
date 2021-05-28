@@ -47,7 +47,9 @@ main {
 	flex-direction: column;
 	align-items: center;
 }
-main > div {
+
+main > div,
+main > form > div {
 	max-width: 400px;
 	width: 100%;
 	border-radius: 10px;
