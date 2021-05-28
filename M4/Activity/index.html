@@ -50,7 +50,6 @@
 				const value = $(`input[name="${i}"]`).val()
 				inputValues.push(value)
 			}
-			console.log(inputValues)
 
 			// Catch outlying conditions
 			if (inputValues.some(v => !v.length ? true : false)) return setInputTarget(['Invalid Input'])
@@ -58,16 +57,16 @@
 			// Sort input values
 			const sortedValues = [...inputValues].sort((a, b) => a > b ? 1 : 0)
 
-			console.log({Input: inputValues})
-			console.log({Sorted: sortedValues})
+			console.log('Input	', inputValues.join(" | ").toString())
+			console.log('Sorted	', sortedValues.join(" | ").toString())
 
 			// Display values
 			setInputTarget(inputValues)
 			setSortedTarget(sortedValues)
 		}
 
-		const setInputTarget = (inputValues) => $(`<div><strong>Input:</strong> ${inputValues.map(s => ' ' + s)}</div>`).appendTo('main').addClass('input-target')
-		const setSortedTarget = (sortedValues) => $(`<div><strong>Sorted:</strong> ${sortedValues.map(s => ' ' + s)}</div>`).appendTo('main').addClass('result-target')
+		const setInputTarget = (inputValues) => $(`<div><strong>Input:</strong> ${inputValues.join(" | ").toString()}</div>`).appendTo('main').addClass('input-target')
+		const setSortedTarget = (sortedValues) => $(`<div><strong>Sorted:</strong> ${sortedValues.join(" | ").toString()}</div>`).appendTo('main').addClass('result-target')
 
 	</script>
 	<style>
