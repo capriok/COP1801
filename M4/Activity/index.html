@@ -19,23 +19,22 @@
 		</header>
 
 		<main>
-			<div>Enter three input values</div>
-			<form id="form-target">
+			<div>Enter three strings, or three numbers</div>
+			<form>
 				<div class="form-inputs">
-					<input id="form-input" name="0" type="text" placeholder="First">
-					<input id="form-input" name="1" type="text" placeholder="Second">
-					<input id="form-input" name="2" type="text" placeholder="Third">
+					<input class="form-input" type="text" placeholder="First">
+					<input class="form-input" type="text" placeholder="Second">
+					<input class="form-input" type="text" placeholder="Third">
 				</div>
-				<div><button id="form-button" type="submit">Sumbit</button></div>
+				<div><button class="form-button" type="submit">Sumbit</button></div>
 			</form>
 		</main>
 	</body>
 
 	<script>
 			
-		$('#form-target').submit(e => submit(e))
-		$('#form-input').submit(e => submit(e))
-		$('#form-button').click(e => submit(e))
+		$('.form-input').submit(e => submit(e))
+		$('.form-button').click(e => submit(e))
 
 		function submit (e) {
 			// Prevent form submission
@@ -45,17 +44,21 @@
 			$('.input-target').remove()
 			$('.result-target').remove()
 
-			let inputValues = new Array()
-			for	(let i = 0; i < 3; i++){
-				const value = $(`input[name="${i}"]`).val()
-				inputValues.push(value)
-			}
+			let inputValues= []
+			$('.form-input').each(function (i) {
+				inputValues.push($(this).val())
+			})
 
-			// Catch outlying conditions
-			if (inputValues.some(v => !v.length ? true : false)) return setInputTarget(['Invalid Input'])
+			// Catch empty input
+			if (inputValues.some(v => !v.length ? true : false)) return setInputTarget(['Invalid Inputs'])
 
 			// Sort input values
-			const sortedValues = [...inputValues].sort((a, b) => a > b ? 1 : 0)
+			let sortedValues;
+			if (inputValues.every(v => Number.isInteger(parseInt(v)))) {
+				sortedValues =  [...inputValues].sort((a, b) => a - b)
+			} else {
+				sortedValues = [...inputValues].sort((a, b) => a > b ? 1 : 0)
+			}
 
 			console.log('Input	', inputValues.join(" | ").toString())
 			console.log('Sorted	', sortedValues.join(" | ").toString())

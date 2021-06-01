@@ -21,19 +21,19 @@
 
 		<main>
 			<div>What generation were you born in?</div>
-			<form id="form-target">
-				<div><input id="input" type="text" placeholder="Enter Birth Year"></div>
-				<div><button id="form-button" type="submit">Find Generation</button></div>
+			<form>
+				<div><input class="form-input" type="text" placeholder="Enter Birth Year"></div>
+				<div><button class="form-button" type="submit">Find Generation</button></div>
 			</form>
 		</main>
 	</body>
 
 	<script>
 
-		$('#form-target').submit(e => submit(e))
-		$('#form-button').click(e => submit(e))
+		$('.form-input').submit(e => submit(e))
+		$('.form-button').click(e => submit(e))
 
-		function submit () {
+		function submit (e) {
 			// Prevent form submission
 			e.preventDefault()
 
