@@ -42,7 +42,7 @@
 			$('.result-target').remove()
 
 			// Get value from input
-			const input = parseInt($('input').val())
+			const input = parseInt($('.form-input').val())
 
 			// Display error if input is not a number
 			if (!Number.isInteger(input)) return setYearTarget('Not A Number')

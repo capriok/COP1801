@@ -36,6 +36,9 @@
 		$('.form-input').submit(e => submit(e))
 		$('.form-button').click(e => submit(e))
 
+		const ALL_STRINGS = inputs => inputs.every(v => !Number.isInteger(parseInt(v)))
+		const ALL_INTEGERS = inputs => inputs.every( v => Number.isInteger(parseInt(v)))
+
 		function submit (e) {
 			// Prevent form submission
 			e.preventDefault()
@@ -49,15 +52,16 @@
 				inputValues.push($(this).val())
 			})
 
-			// Catch empty input
-			if (inputValues.some(v => !v.length ? true : false)) return setInputTarget(['Invalid Inputs'])
-
-			// Sort input values
-			let sortedValues;
-			if (inputValues.every(v => Number.isInteger(parseInt(v)))) {
-				sortedValues =  [...inputValues].sort((a, b) => a - b)
+			// Check input types, sort accordingly
+			let sortedValues
+			if (ALL_STRINGS(inputValues)) {
+				console.log('Sorting Strings');
+				sortedValues = [...inputValues].sort(stringCompare)
+			} else if (ALL_INTEGERS(inputValues)) {
+				console.log('Sorting Integers');
+				sortedValues = [...inputValues].sort(integerCompare)
 			} else {
-				sortedValues = [...inputValues].sort((a, b) => a > b ? 1 : 0)
+				return setInputTarget(['Invalid Inputs'])
 			}
 
 			console.log('Input	', inputValues.join(" | ").toString())
@@ -67,6 +71,9 @@
 			setInputTarget(inputValues)
 			setSortedTarget(sortedValues)
 		}
+
+		const stringCompare = (a, b) => a.localeCompare(b)
+		const integerCompare = (a, b) => a - b
 
 		const setInputTarget = (inputValues) => $(`<div><strong>Input:</strong> ${inputValues.join(" | ").toString()}</div>`).appendTo('main').addClass('input-target')
 		const setSortedTarget = (sortedValues) => $(`<div><strong>Sorted:</strong> ${sortedValues.join(" | ").toString()}</div>`).appendTo('main').addClass('result-target')
