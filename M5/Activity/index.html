@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 		<title>COP1801 JS</title>
 		<link rel="stylesheet" href="../../index.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	</head>
 	<body>
 		<nav class="nav">
@@ -13,13 +14,78 @@
 		</nav>
 		<header class="head">
 			<h2>Module 5</h2>
-			<p>Activity: </p>
+			<p>Activity: Write a function to get the values of form containing First Name, Last
+				Name, Address, City, and State</p>
 		</header>
 
-		<center><div class="target">Target</div></center>
+		<main>
+			<form>
+				<div class="form-inputs">
+					<input class="form-input" placeholder="First Name" type="text" name="fName" />
+					<input class="form-input" placeholder="Last Name" type="text" name="lName" />
+					<input class="form-input" placeholder="Address" type="text" name="address" />
+					<input class="form-input" placeholder="City" type="text" name="city" />
+					<input class="form-input" placeholder="State" type="text" name="state" />
+				</div>
+				<div><button class="form-button" type="submit">Submit</button></div>
+			</form>
+		</main>
 	</body>
 
 	<script>
-			
+		$('.form-input').submit(e => submit(e))
+		$('.form-button').click(e => submit(e))
+
+		function submit (e) {
+			// Prevent default submission 
+			e.preventDefault()
+
+			// Clear display target
+			$('.display-target').remove()
+
+			// Display input values
+			DisplayFormValue('First Name', $(`input[name="fName"]`).val())
+			DisplayFormValue('Last Name', $(`input[name="lName"]`).val())
+			DisplayFormValue('Address', $(`input[name="address"]`).val())
+			DisplayFormValue('City', $(`input[name="city"]`).val())
+			DisplayFormValue('State', $(`input[name="state"]`).val())
+		}
+
+		function DisplayFormValue (label, value) {
+			return $(`<div><label>${label}</label><span>${value}</span></div>`)
+			.appendTo('main')
+			.addClass('display-target')
+		}
+
 	</script>
+	<style>
+		main {
+			margin: 0 auto;
+			text-align: center;
+		}
+		form {
+			width: 400px;
+		}
+		.form-inputs {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			flex-direction: column;
+		}
+		.form-input, 
+		.display-target {
+			width: 100%;
+			margin: 5px;
+			display: flex;
+			justify-content: space-between;
+		}
+		.display-target > label,
+		.display-target > span {
+			flex: 1;
+		}
+		.form-inputs > input {
+			width: 200px;
+		}
+	</style>
 </html>

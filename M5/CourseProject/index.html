@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 		<title>COP1801 JS</title>
 		<link rel="stylesheet" href="../../index.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	</head>
 	<body>
 		<nav class="nav">
@@ -13,13 +14,111 @@
 		</nav>
 		<header class="head">
 			<h2>Module 5</h2>
-			<p>Course Project: </p>
+			<p>Course Project: Modify the M5 Activity script to store the form elements as variables and
+				display them on the page in an HTML table.</p>
 		</header>
 
-		<center><div class="target">Target</div></center>
+		<main>
+			<form>
+				<div class="form-inputs">
+					<div class="form-row"><label>First Name</label><input class="form-input" name="fName" /></div>
+					<div class="form-row"><label>Last Name</label><input class="form-input" name="lName" /></div>
+					<div class="form-row"><label>Address</label><input class="form-input" name="address" /></div>
+					<div class="form-row"><label>City</label><input class="form-input" name="city" /></div>
+					<div class="form-row"><label>State</label><input class="form-input" name="state" /></div>
+				</div>
+				<div><button class="form-button" type="submit">Display Values</button></div>
+			</form>
+		</main>
 	</body>
-
 	<script>
+		$('.form-input').submit(e => DisplayValues(e))
+		$('.form-button').click(e => DisplayValues(e))
+
+		const form = {
+			fName: '', lName: '', address: '', city: '', state: ''
+		}
+
+		$('.form-input').change(function(e) {
+			form[e.target.name] = e.target.value
+		})
+
+		function DisplayValues (e) {
+		// 	// Prevent default submission 
+			e.preventDefault()
 			
+		// 	// Clear display target
+			$('.display-target').remove()
+			
+			console.log({
+				FirstName: form.fName,
+				lastName: form.lName,
+				Address: form.address,
+				City: form.city,
+				State: form.state
+			})
+
+			CreateTable()
+			AddHeadings(['First Name', 'Last Name', 'Address' ,'City', 'State'])
+			AddToTable(form.fName)
+			AddToTable(form.lName)
+			AddToTable(form.address)
+			AddToTable(form.city)
+			AddToTable(form.state)
+		}
+
+		function CreateTable () {
+			$('<table><tbody><tr class="table-headings"></tr><tr class="table-values"></tr></tbody></table>')
+			.appendTo('main').addClass('display-target')
+		}
+
+		function AddHeadings (headings) {
+			headings.forEach(heading => {
+				$(`<th>${heading}</th>`).appendTo('.table-headings')	
+			})
+		}
+		
+		function AddToTable(value) {
+			$(`<td>${value}</td>`).appendTo('.table-values')	
+		}
+
 	</script>
+	<style>
+		main {
+			margin: 0 auto;
+			text-align: center;
+		}
+		form {
+			width: 400px;
+		}
+		.form-inputs {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			flex-direction: column;
+		}
+		.form-row, 
+		.form-table {
+			width: 100%;
+			margin: 5px;
+			display: flex;
+			justify-content: space-between;
+		}
+		
+		table {
+			width: 600px;
+			margin-top: 10px;
+			padding: 5px;
+			border-radius: 5px;
+			background-color: rgb(240, 240, 240);
+		}
+		table > tbody > tr > th {
+			padding-bottom: 20px;
+			border-bottom: 1px solid rgb(205, 205, 205);
+		}
+		table > tbody > tr >td {
+			padding-top: 10px;
+		}
+	</style>
 </html>
