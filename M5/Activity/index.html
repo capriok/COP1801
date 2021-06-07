@@ -33,6 +33,7 @@
 	</body>
 
 	<script>
+		
 		$('.form-input').submit(e => submit(e))
 		$('.form-button').click(e => submit(e))
 
@@ -44,12 +45,16 @@
 			$('.display-target').remove()
 
 			// Display input values
-			DisplayFormValue('First Name', $(`input[name="fName"]`).val())
-			DisplayFormValue('Last Name', $(`input[name="lName"]`).val())
-			DisplayFormValue('Address', $(`input[name="address"]`).val())
-			DisplayFormValue('City', $(`input[name="city"]`).val())
-			DisplayFormValue('State', $(`input[name="state"]`).val())
+			DisplayFormValue('First Name', getInputValue('fName'))
+			DisplayFormValue('Last Name', getInputValue('lName'))
+			DisplayFormValue('Address', getInputValue('address'))
+			DisplayFormValue('City', getInputValue('city'))
+			DisplayFormValue('State', getInputValue('state'))
 		}
+
+		function getInputValue (name) {
+			return $(`input[name="${name}"]`).val()
+		} 
 
 		function DisplayFormValue (label, value) {
 			return $(`<div><label>${label}</label><span>${value}</span></div>`)

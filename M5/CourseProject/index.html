@@ -32,25 +32,30 @@
 		</main>
 	</body>
 	<script>
-		$('.form-input').submit(e => DisplayValues(e))
-		$('.form-button').click(e => DisplayValues(e))
-
-		const form = {
-			fName: '', lName: '', address: '', city: '', state: ''
-		}
+		
+		$('.form-input').each(function () { $(this).val('') })
+	
+		const form = { fName: '', lName: '', address: '', city: '', state: '' }
 
 		$('.form-input').change(function(e) {
 			form[e.target.name] = e.target.value
 		})
-
+		$('.form-input').submit(e => DisplayValues(e))
+		$('.form-button').click(e => DisplayValues(e))
+		
 		function DisplayValues (e) {
-		// 	// Prevent default submission 
+			// Prevent default submission 
 			e.preventDefault()
-			
-		// 	// Clear display target
+
+			// Clear display target
 			$('.display-target').remove()
 			
-			console.log({
+			// Check if form is complete
+			for (value in form) {
+				if (!form[value]) return ErrorMessage('Complete the form')
+			}
+				
+			console.log('Form', {
 				FirstName: form.fName,
 				lastName: form.lName,
 				Address: form.address,
@@ -58,28 +63,22 @@
 				State: form.state
 			})
 
-			CreateTable()
-			AddHeadings(['First Name', 'Last Name', 'Address' ,'City', 'State'])
-			AddToTable(form.fName)
-			AddToTable(form.lName)
-			AddToTable(form.address)
-			AddToTable(form.city)
-			AddToTable(form.state)
-		}
-
-		function CreateTable () {
-			$('<table><tbody><tr class="table-headings"></tr><tr class="table-values"></tr></tbody></table>')
-			.appendTo('main').addClass('display-target')
-		}
-
-		function AddHeadings (headings) {
-			headings.forEach(heading => {
-				$(`<th>${heading}</th>`).appendTo('.table-headings')	
-			})
+			$('<table></table>').appendTo('main').addClass('display-target')
+			AddRowToTable('First Name', form.fName)
+			AddRowToTable('Last Name', form.lName)
+			AddRowToTable('Address', form.address)
+			AddRowToTable('City', form.city)
+			AddRowToTable('State', form.state)
+			
 		}
 		
-		function AddToTable(value) {
-			$(`<td>${value}</td>`).appendTo('.table-values')	
+		function AddRowToTable(heading, data = '') {
+			$(`<tr><th>${heading}</th><td>${data}</td>></tr>`).appendTo('table')	
+		}
+		
+		function ErrorMessage (message) {
+			$(`<div><strong>${message}</strong></div>`)
+			.appendTo('main').addClass('display-target')
 		}
 
 	</script>
@@ -92,32 +91,44 @@
 			width: 400px;
 		}
 		.form-inputs {
-			width: 100%;
 			display: flex;
-			align-items: center;
-			justify-content: space-between;
 			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
+			width: 100%;
 		}
 		.form-row, 
 		.form-table {
-			width: 100%;
-			margin: 5px;
 			display: flex;
 			justify-content: space-between;
+			width: 100%;
+			margin: 5px;
 		}
 		
 		table {
-			width: 600px;
-			margin-top: 10px;
+			width: 400px;
 			padding: 5px;
 			border-radius: 5px;
+			border-collapse: collapse;
+			border: 1px solid rgb(205, 205, 205);
 			background-color: rgb(240, 240, 240);
 		}
-		table > tbody > tr > th {
-			padding-bottom: 20px;
-			border-bottom: 1px solid rgb(205, 205, 205);
+		table > tr > th,
+		table > tr > td  {
+			word-wrap: break-word;
+			max-width: 200px;
+			padding: 5px;
+			border: 1px solid rgb(205, 205, 205);
+			border-radius: 5px;
 		}
-		table > tbody > tr >td {
+		table > tr:hover {
+			cursor: pointer;
+			background-color: #f5f5f5;
+		}
+		table > tr > td {
+			width: 200px;
+			flex: 1;
+			margin-right: auto;
 			padding-top: 10px;
 		}
 	</style>
