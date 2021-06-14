@@ -63,27 +63,30 @@
 			const height = Math.round((form.height / 39.37) * 1000.0) / 1000.0;
 			const weight = Math.round((form.weight / 2.205) * 100.0) / 100.0;
 
-			DisplayBMI(calculateBMI(height, weight))
-			DisplayCategory(getWeightCategory(userBMI))
+			const userBodyMassIndex = calculateBMI(height, weight)
+			const userWeightCategory = getWeightCategory(userBodyMassIndex)
+
+			//Display results
+			DisplayBMI(userBodyMassIndex)
+			DisplayCategory(userWeightCategory)
 		}
 
 		function calculateBMI(h, w) {
 		return Math.round((w / (h * h)) * 100.0) / 100.0;
 		}
 
-		function getWeightCategory(userBMI) {
+		function getWeightCategory(bmi) {
 			switch(true) {
-				case userBMI <= 18.5:
+				case bmi <= 18.5:
 					return "Underweight";
-				case userBMI <= 24.9:
+				case bmi <= 24.9:
 					return "Normal Weight";
-				case userBMI <=  29.9:
+				case bmi <=  29.9:
 					return "Overweight";
-				case userBMI >= 30:
+				case bmi >= 30:
 					return "Obese";
 		}
 	}
-		
 	
 	function DisplayBMI(userBMI) {
 			$(`<div><strong>Body Mass Index: </strong>${userBMI}</div>`)
