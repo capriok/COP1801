@@ -52,7 +52,6 @@
 		
 		function ProcessForm(e) {
 			e.preventDefault()
-
 			$('.display-target').remove()
 			
 			// Check if form is complete
@@ -72,7 +71,7 @@
 		}
 
 		function calculateBMI(h, w) {
-		return Math.round((w / (h * h)) * 100.0) / 100.0;
+			return Math.round((w / (h * h)) * 100.0) / 100.0;
 		}
 
 		function getWeightCategory(bmi) {

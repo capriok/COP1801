@@ -45,16 +45,13 @@
 		$('.form-button').click(e => DisplayValues(e))
 
 		function DisplayValues (e) {
-			// Prevent default submission 
 			e.preventDefault()
-
-			// Clear display target
 			$('.display-target').remove()
 			
 			// Check if form is complete
-			// for (value in form) {
-			// 	if (!form[value]) return ErrorMessage('Complete the form')
-			// }
+			for (value in form) {
+				if (!form[value]) return ErrorMessage('Complete the form')
+			}
 				
 			console.log('Form', {
 				FirstName: form.fName,
@@ -71,6 +68,7 @@
 			AddFormColumn('City', form.city)
 			AddFormColumn('State', form.state)
 			
+			// Activate table style handlers
 			$('#table-values').mouseover(function (e) {
 				e.target.style.color = 'steelblue'
 				e.target.style.fontWeight = 'bold'
