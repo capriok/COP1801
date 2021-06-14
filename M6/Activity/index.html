@@ -84,22 +84,22 @@
 					return "Overweight";
 				case bmi >= 30:
 					return "Obese";
+			}
 		}
-	}
 	
-	function DisplayBMI(userBMI) {
+		function DisplayBMI(userBMI) {
 			$(`<div><strong>Body Mass Index: </strong>${userBMI}</div>`)
-			.appendTo('main').addClass('display-target')
-	}
+				.appendTo('main').addClass('display-target')
+		}
 
-	function DisplayCategory(userCategory) {
+		function DisplayCategory(userCategory) {
 			$(`<div><strong>Weight Category: </strong>${userCategory}</div>`)
-			.appendTo('main').addClass('display-target')
-	}
+				.appendTo('main').addClass('display-target')
+		}
 
-	function ErrorMessage (message) {
+		function ErrorMessage (message) {
 			$(`<div><strong>${message}</strong></div>`)
-			.appendTo('main').addClass('display-target')
+				.appendTo('main').addClass('display-target')
 		}
 
 	</script>
