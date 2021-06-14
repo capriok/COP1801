@@ -14,13 +14,113 @@
 		</nav>
 		<header class="head">
 			<h2>Module 6</h2>
-			<p>Activity: </p>
+			<p>Activity: Create a form to allow the user to enter variables for some
+				type of calculation. When the user clicks a button, display the calculated results.</p>
+			<p>Example - calculate the square footage of a rectagngle room (area = length *width).</p>
 		</header>
-
-		<main><div class="target">Target</div></main>
+		<main>
+			<div><strong>BMI Calculator</strong></div>
+			<form>
+				<div class="form-inputs">
+					<input class="form-input" type="text" name="height" placeholder="Height (Inches)">
+					<input class="form-input" type="text" name="weight" placeholder="Weight (Pounds)">
+				</div>
+				<div><button class="form-button" type="submit">Calculate</button></div>
+			</form>
+		</main>
 	</body>
 
 	<script>
+
+		$('.form-input').each(function () { $(this).val('') })
+
+		const form = { height: undefined, weight: undefined }
+
+		$('.form-input').change(function(e) {
+			$('.display-target').remove()
+			const inputValue = e.target.value
+			if (Number.isInteger(parseInt(inputValue))) {
+				form[e.target.name] = parseInt(inputValue)
+			} else {
+				$(this).val('')
+				ErrorMessage('Must be an integer')
+			}
+		})
+		
+		$('.form-input').submit(e => ProcessForm(e))
+		$('.form-button').click(e => ProcessForm(e))
+		
+		function ProcessForm(e) {
+			e.preventDefault()
+
+			$('.display-target').remove()
 			
+			// Check if form is complete
+			for (value in form) {
+				if (!form[value]) return ErrorMessage('Complete the Form')
+			}
+			
+			const height = Math.round((form.height / 39.37) * 1000.0) / 1000.0;
+			const weight = Math.round((form.weight / 2.205) * 100.0) / 100.0;
+
+			DisplayBMI(calculateBMI(height, weight))
+			DisplayCategory(getWeightCategory(userBMI))
+		}
+
+		function calculateBMI(h, w) {
+		return Math.round((w / (h * h)) * 100.0) / 100.0;
+		}
+
+		function getWeightCategory(userBMI) {
+			switch(true) {
+				case userBMI <= 18.5:
+					return "Underweight";
+				case userBMI <= 24.9:
+					return "Normal Weight";
+				case userBMI <=  29.9:
+					return "Overweight";
+				case userBMI >= 30:
+					return "Obese";
+		}
+	}
+		
+	
+	function DisplayBMI(userBMI) {
+			$(`<div><strong>Body Mass Index: </strong>${userBMI}</div>`)
+			.appendTo('main').addClass('display-target')
+	}
+
+	function DisplayCategory(userCategory) {
+			$(`<div><strong>Weight Category: </strong>${userCategory}</div>`)
+			.appendTo('main').addClass('display-target')
+	}
+
+	function ErrorMessage (message) {
+			$(`<div><strong>${message}</strong></div>`)
+			.appendTo('main').addClass('display-target')
+		}
+
 	</script>
+	<style>
+		main {
+			margin: 0 auto;
+			text-align: center;
+		}
+		form {
+			width: 400px;
+		}
+		.form-inputs {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
+			width: 100%;
+		}
+		.form-inputs .form-input {
+			display: flex;
+			justify-content: space-between;
+			width: 200px;
+			margin: 5px;
+		}
+	</style>
 </html>

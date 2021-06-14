@@ -14,13 +14,140 @@
 		</nav>
 		<header class="head">
 			<h2>Module 6</h2>
-			<p>Course Project: </p>
+			<p>Course Project: Modify the M5 Course Project to display the table so each form element has its
+				own header and column.</p>
+			<p>Change font weight and color when user hovers form elements.</p>
 		</header>
 
-		<main><div class="target">Target</div></main>
+		<main>
+			<form>
+				<div class="form-inputs">
+					<div class="form-row"><label>First Name</label><input class="form-input" name="fName" /></div>
+					<div class="form-row"><label>Last Name</label><input class="form-input" name="lName" /></div>
+					<div class="form-row"><label>Address</label><input class="form-input" name="address" /></div>
+					<div class="form-row"><label>City</label><input class="form-input" name="city" /></div>
+					<div class="form-row"><label>State</label><input class="form-input" name="state" /></div>
+				</div>
+				<div><button class="form-button" type="submit">Display Values</button></div>
+			</form>
+		</main>
 	</body>
-
 	<script>
+		
+		$('.form-input').each(function () { $(this).val('') })
+	
+		const form = { fName: '', lName: '', address: '', city: '', state: '' }
+
+		$('.form-input').change(function(e) {
+			form[e.target.name] = e.target.value
+		})
+		$('.form-input').submit(e => DisplayValues(e))
+		$('.form-button').click(e => DisplayValues(e))
+
+		function DisplayValues (e) {
+			// Prevent default submission 
+			e.preventDefault()
+
+			// Clear display target
+			$('.display-target').remove()
 			
+			// Check if form is complete
+			// for (value in form) {
+			// 	if (!form[value]) return ErrorMessage('Complete the form')
+			// }
+				
+			console.log('Form', {
+				FirstName: form.fName,
+				lastName: form.lName,
+				Address: form.address,
+				City: form.city,
+				State: form.state
+			})
+
+			CreateTable()
+			AddFormColumn('First Name', form.fName)
+			AddFormColumn('Last Name', form.lName)
+			AddFormColumn('Address', form.address)
+			AddFormColumn('City', form.city)
+			AddFormColumn('State', form.state)
+			
+			$('#table-values').mouseover(function (e) {
+				e.target.style.color = 'steelblue'
+				e.target.style.fontWeight = 'bold'
+			})
+
+			$('#table-values').mouseout(function (e) {
+				e.target.style.color = 'initial'
+				e.target.style.fontWeight = 'initial'
+			})
+		}
+
+		function CreateTable() {
+			$('<table><tbody><tr id="table-headers"></tr><tr id="table-values"></tr></tbody></table>')
+				.appendTo('main').addClass('display-target')
+		}
+		
+		function AddFormColumn(heading, value = '') {
+			$(`<th>${heading}</th>`).appendTo('#table-headers').addClass('t-header')
+			$(`<td>${value}</td>>`).appendTo('#table-values').addClass('t-value')
+		}
+		
+		function ErrorMessage (message) {
+			$(`<div><strong>${message}</strong></div>`)
+			.appendTo('main').addClass('display-target')
+		}
+
 	</script>
+	<style>
+		main {
+			margin: 0 auto;
+			text-align: center;
+		}
+		form {
+			width: 400px;
+		}
+		.form-inputs {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
+			width: 100%;
+		}
+		.form-row, 
+		.form-table {
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+			margin: 5px;
+		}
+		
+		table {
+			width: 800px;
+			padding: 5px;
+			border-radius: 5px;
+			border-collapse: collapse;
+			border: 1px solid rgb(205, 205, 205);
+			background-color: rgb(240, 240, 240);
+		}
+		table > tbody > #table-headers > th,
+		table > tbody > #table-values > td {
+			word-wrap: break-word;
+			max-width: 200px;
+			padding: 10px;
+			border: 1px solid rgb(205, 205, 205);
+			border-radius: 5px;
+		}
+		table > tbody > tr > th {
+			cursor: default;
+		}
+		table > tbody > tr > td {
+			cursor: pointer;
+		}
+		table > tbody > tr > td {
+			width: 200px;
+			flex: 1;
+			margin-right: auto;
+			padding-top: 10px;
+		}
+	</style>
 </html>
